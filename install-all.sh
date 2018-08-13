@@ -134,3 +134,17 @@ code --install-extension steoates.autoimport
 
 # Fonts
 cp cp -f ${BASEDIR}/Fonts/* ~/Library/Fonts
+
+# Exclude folders from Spotlight
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Library/Backblaze.bzpkg"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/System/Library/Caches"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Application Support/CrashReporter"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Application Support/SyncServices"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Caches"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Cookies"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Logs/Sync"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Preferences"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/PubSub"
+sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Safari"
+# Should restart the computer after this or execute the following line
+# sudo launchctl stop com.apple.metadata.mds && sudo launchctl start com.apple.metadata.mds
