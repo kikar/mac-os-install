@@ -31,8 +31,6 @@ mas install \
   880001334 \
   # WhatsApp
   1147396723 \
-  # # Kiwi for Gmail
-  # 986304488
 
 # visual studio code install extentions
 code --install-extension MariusAlchimavicius.json-to-ts
