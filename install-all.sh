@@ -1,49 +1,7 @@
 #!/bin/bash
 
-BASEDIR=$(pushd $(dirname "$0") > /dev/null && pwd && popd > /dev/null)
-
 # Don't write last login on terminal
 touch ~/.hushlogin
-
-# Check and install brew
-if [ ! `which brew` ]; then
-  echo "Command brew not found... Installing";
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-brew update
-brew doctor
-
-# Install packages
-brew install \
-  archey \
-  awscli \
-  git \
-  mariadb \
-  mas \
-  mongodb \
-  nvm \
-  redis \
-  zsh
-
-# Force to use the git installed by brew
-brew link --force git
-
-# Start services
-brew services start mariadb
-brew services start mongodb
-brew services start redis
-
-# Set zsh as main terminal
-chsh -s /usr/local/bin/zsh
-# Install Oh My Zsh
-curl -L http://install.ohmyz.sh | sh
-# Install syntax highlighting
-cd ~/.oh-my-zsh && git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zshrc
-
-# NVM setup
-mkdir ~/.nvm
 
 # Install Node.js
 nvm install 8
@@ -56,7 +14,7 @@ npm i -g \
   @nestjs/cli \
   localtunnel \
   npm \
-  react-native-cli \
+  terminalizer \
   thanks
 
 # Install apps from Mac App Store
@@ -73,78 +31,33 @@ mas install \
   880001334 \
   # WhatsApp
   1147396723 \
-  # Kiwi for Gmail
-  986304488
-
-# Install .app
-brew cask install \
-  1password \
-  alfred \
-  appcleaner \
-  bartender \
-  coconutbattery \
-  dash \
-  discord \
-  docker \
-  dropbox \
-  firefox \
-  google-chrome \
-  grandperspective \
-  handbrake \
-  istat-menus \
-  iterm2 \
-  little-snitch \
-  homebrew/cask-drivers/logitech-options \
-  plex-media-server \
-  postgres \
-  postman \
-  protonvpn \
-  robo-3t \
-  sequel-pro \
-  skype \
-  spotify \
-  sync \
-  teamviewer \
-  the-unarchiver \
-  torbrowser \
-  transmission \
-  tunnelblick \
-  visual-studio-code \
-  vlc
-
-# iTerm2 configuration
-cp com.googlecode.iterm2 ~/Library/Preferences/com.googlecode.iterm2.plist
-defaults read com.googlecode.iterm2
-
-# Configure home directory
-cp -f ${BASEDIR}/home/* ~/
+  # # Kiwi for Gmail
+  # 986304488
 
 # visual studio code install extentions
+code --install-extension MariusAlchimavicius.json-to-ts
+code --install-extension akamud.vscode-caniuse
+code --install-extension christian-kohler.npm-intellisense
+code --install-extension christian-kohler.path-intellisense
 code --install-extension CoenraadS.bracket-pair-colorizer
+code --install-extension eamodio.gitlens
+code --install-extension eg2.vscode-npm-script
 code --install-extension esbenp.prettier-vscode
-code --install-extension felixfbecker.php-intellisense
-code --install-extension ipedrazas.kubernetes-snippets
-code --install-extension MS-CEINTL.vscode-language-pack-it
-code --install-extension ms-vscode.Go
+code --install-extension GrapeCity.gc-excelviewer
+code --install-extension kisstkondoros.vscode-codemetrics
+code --install-extension mechatroner.rainbow-csv
+code --install-extension mikestead.dotenv
+code --install-extension monokai.theme-monokai-pro-vscode
 code --install-extension ms-vsliveshare.vsliveshare
+code --install-extension msjsdiag.debugger-for-chrome
+code --install-extension Orta.vscode-jest
 code --install-extension PeterJausovec.vscode-docker
-code --install-extension rbbit.typescript-hero
+code --install-extension pnp.polacode
 code --install-extension robertohuertasm.vscode-icons
-code --install-extension steoates.autoimport
+code --install-extension Shan.code-settings-sync
+code --install-extension VisualStudioExptTeam.vscodeintellicode
+code --install-extension WakaTime.vscode-wakatime
 
-# Fonts
-cp cp -f ${BASEDIR}/Fonts/* ~/Library/Fonts
-
-# Exclude folders from Spotlight
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Library/Backblaze.bzpkg"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/System/Library/Caches"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Application Support/CrashReporter"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Application Support/SyncServices"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Caches"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Cookies"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Logs/Sync"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Preferences"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/PubSub"
-sudo defaults write /Volumes/Tapuach/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add "/Users/bait/Library/Safari"
-# Should restart the computer after this or execute the following line
-# sudo launchctl stop com.apple.metadata.mds && sudo launchctl start com.apple.metadata.mds
+# SSH keys
+# https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent
+# https://gist.github.com/srijanshetty/65e7b9ede7e12743fbd7
